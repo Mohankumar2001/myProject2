@@ -1,3 +1,19 @@
-body {
-    background-color: aqua;
+
+main {
+    background-color: rgba(0,0,0,0.2);
+    margin: 20%;
+    margin-top: 5%;
+    padding: 5%;
+}
+
+nav {
+    background-color: rgba(60, 179, 113,0.5);
+    display: flex;
+    flex-direction: row;
+}
+
+nav > ul > li > a {
+    font-family:'Courier New', Courier, monospace;
+    color: white;   
+    text-decoration: none;
 }

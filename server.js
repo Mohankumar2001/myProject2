@@ -2,10 +2,13 @@ const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
+const Handlebars = require('handlebars');
+const bodyParser = require('body-parser');
 
 // connections
 const app = express();
 app.set('view engine', 'hbs'); 
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public'))); 
 dotenv.config({path: '.env'});
 
@@ -25,15 +28,15 @@ db.connect( (error) => {
     }
 })
 
+// parsers
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 
-app.get('/', (req, res) => {
-    res.send('hi');
-});
+// routes
+app.use('/', require('./routes/pages'));
+app.use('/auth', require('./routes/auth'));
 
-app.get('/index', (req, res) => {
-    res.render('index');
-})
 
 app.listen(3456, () => {
     console.log('listening on port 3456')
