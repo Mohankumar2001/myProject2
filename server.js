@@ -4,6 +4,9 @@ const mysql = require('mysql');
 const dotenv = require('dotenv');
 const Handlebars = require('handlebars');
 const bodyParser = require('body-parser');
+const {body, validationResult} = require('express-validator');
+const session = require('express-session');
+const passport = require('passport');
 
 // connections
 const app = express();
@@ -12,25 +15,22 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public'))); 
 dotenv.config({path: '.env'});
 
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
-})
-
-db.connect( (error) => {
-    if(error) {
-        console.log(error);
-    }
-    else {
-        console.log('database is connected');
-    }
-})
+const db = require('./db.js');
 
 // parsers
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+// app.use(validationResult);
+
+//session + passport integration
+app.use(session({
+    secret: 'my_secret',
+    resave: false,
+    saveUninitialized: false,
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // routes

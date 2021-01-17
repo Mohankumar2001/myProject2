@@ -3,10 +3,9 @@ const router = express.Router();
 
 const authController = require('../controllers/auth');
 
-router.post('/login', (req, res) => {
-    res.render('login.hbs');
-});
-
 router.post('/register', authController.register);
+
+router.post('/login', authController.login);
+
 
 module.exports = router;

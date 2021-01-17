@@ -6,15 +6,24 @@ router.get('/', (req, res) => {
 });
 
 router.get('/index', (req, res) => {
+    console.log(req.isAuthenticated());
     res.render('index');
 });
 
 router.get('/login', (req, res) => {
+    console.log('login');
     res.render('login.hbs');
 });
 
 router.get('/register', (req, res) => {
+    console.log('register');
     res.render('register.hbs');
 });
+
+router.get('/dashboard', (req, res) => {
+    console.log(req.isAuthenticated());
+    console.log('dashboard');
+    res.render('dashboard');
+})
 
 module.exports = router;
