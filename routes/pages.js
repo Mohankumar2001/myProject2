@@ -16,6 +16,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
+    console.log(req.isAuthenticated());
     console.log('register');
     res.render('register.hbs');
 });
@@ -24,6 +25,12 @@ router.get('/dashboard', (req, res) => {
     console.log(req.isAuthenticated());
     console.log('dashboard');
     res.render('dashboard');
+})
+
+router.get('/logout', (req, res) => {
+    console.log(req.isAuthenticated());
+    console.log('dashboard');
+    res.render('logout');
 })
 
 module.exports = router;

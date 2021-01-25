@@ -82,3 +82,11 @@ passport.deserializeUser(function(id, done) {
     done(null, id);
 })
 }
+
+
+exports.logout = (req, res) => {
+    req.logout();
+    req.session.destroy();
+    console.log('logout');
+    res.render('login');
+}
